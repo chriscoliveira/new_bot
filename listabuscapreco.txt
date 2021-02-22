@@ -1,0 +1,18 @@
+10.18.3.54,Corredor 01
+10.18.3.60,Corredor 02
+10.18.3.59,Corredor 03
+10.18.3.51,Corredor 04
+10.18.3.63,Corredor 05
+10.18.3.65,Corredor 06
+10.18.3.55,Corredor 07
+10.18.3.62,Corredor 08
+10.18.3.50,Corredor 09
+10.18.3.52,Corredor 10
+10.18.3.67,Coca Cola
+10.18.3.57,Cerveja
+10.18.3.56,Alto giro 1
+10.18.3.58,Alto giro 2
+10.18.3.53,HortFrut 1
+10.18.3.66,HortFrut 2
+10.18.3.64,Açougue
+10.18.3.61,Pereciveis
