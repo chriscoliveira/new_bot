@@ -43,6 +43,16 @@ class Funcoes:
         envio.close()
         file.close()
 
+    def chamado(assunto):
+        envio = open('chamados.txt', 'a')
+        envio.write(assunto + '\n')
+        envio.close()
+
+    def limpachamado():
+        envio = open('chamados.txt', 'w')
+        envio.write('')
+        envio.close()
+
     def toner():
         envio = open('envioTelegram.txt', 'w')
         file = open('4impressoras.txt')
