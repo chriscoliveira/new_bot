@@ -43,6 +43,19 @@ class Funcoes:
         envio.close()
         file.close()
 
+    def ping(ip):
+        envio = open('envioTelegram.txt', 'w')
+        file = open('listabuscapreco.txt')
+        res = subprocess.call(['ping', '-c', '3', ip])
+        if res == 0:
+            envio.write(f'OK -> {ip}\n')
+        elif res == 2:
+            envio.write(f'\nOFF-LINE -> {ip}\n\n')
+        else:
+            envio.write(f'\nOFF-LINE -> {ip}\n\n')
+        envio.close()
+        file.close()
+
     def chamado(assunto):
         envio = open('chamados.txt', 'a')
         envio.write(assunto + '\n')
@@ -148,4 +161,4 @@ class Funcoes:
 
 if __name__ == "__main__":
     funcao = Funcoes()
-    funcao.toner()
+    funcao.ping('10.18.2.160')
