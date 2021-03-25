@@ -3,23 +3,25 @@ import telepot
 import os
 from classes import Funcoes
 
-
 mensagem = f'\nBOT CT18,\nuse os comandos:\n/pdv_uptime : uptime dos pdvs\n/pdv_memoria_livre : memoria livre pdvs\n' \
            f'/pdv_limpa_memoria : Limpa Memoria PDV\n/exibe_hora - exibe a hora dos pdvs\n' \
            f'/acerta_hora - corrige a hora dos pdvs\n/reinicia_pdv : Reinicia o pdv com base no ultimo octeto (Ex 101,102)\n' \
            f'/verifica_cftv : Exibe status CFTV\n/verifica_buscapreco : lista busca precos\n/nivel_toner : nivel toner\n' \
-           f'/triggers : triggers ativas\n/startvnc\n\n/chamados : palavra q informe o assunto - limpa - sem nada para exibir'
+           f'/triggers : triggers ativas\n/ping : pinga o IP solicitado\n/eda_online : exibe a ultima data que o EDA esteve ON\n\n/chamados : palavra q informe o assunto - limpa - sem nada para exibir'
 
 '''
-1035577098 cpd
-
+1035577098 cpd18
+1299478866 cpd08
+769723764 part
 '''
+
+
 def handleCommad(content):
     try:
         chat_id = content['chat']['id']
         name = content['chat']['first_name']
-        print(chat_id,type(chat_id))
-        if chat_id == 1035577098 or chat_id == 769723764:
+        print(chat_id, type(chat_id))
+        if chat_id == 1035577098 or chat_id == 769723764 or chat_id == 1299478866:
             try:
                 command, *param = content['text'].split()
             except:
@@ -39,25 +41,28 @@ def handleCommad(content):
                 bot.sendMessage(chat_id, " " + str(inf.read()))
 
             if "pdv_memoria_livre" in command:
-                bot.sendMessage(chat_id, f'Memoria Livre dos PDVs\nAguarde um momento {name}, vou consultar para voce =)')
+                bot.sendMessage(chat_id,
+                                f'Memoria Livre dos PDVs\nAguarde um momento {name}, vou consultar para voce =)')
                 os.system('/bin/bash -c "sh comandos.sh memlivre"')
                 inf = open("envioTelegram.txt")
                 bot.sendMessage(chat_id, " " + str(inf.read()))
 
             if "pdv_limpa_memoria" in command:
-                bot.sendMessage(chat_id, f'Limpeza memoria Pdv\nAguarde um momento {name}, vou consultar para voce =)')
+                bot.sendMessage(chat_id, f'Limpeza memoria Pdv\nAguarde um momento {name}, limpando memoria... =)')
                 os.system('/bin/bash -c "sh comandos.sh limpamem"')
                 inf = open("envioTelegram.txt")
                 bot.sendMessage(chat_id, " " + str(inf.read()))
 
             if "exibe_hora" in command:
-                bot.sendMessage(chat_id, f'Exibindo a hora dos Pdvs\nAguarde um momento {name}, vou consultar para voce =)')
+                bot.sendMessage(chat_id,
+                                f'Exibindo a hora dos Pdvs\nAguarde um momento {name}, vou consultar para voce =)')
                 os.system('/bin/bash -c "sh comandos.sh exibehora"')
                 inf = open("envioTelegram.txt", encoding="ISO-8859-1")
                 bot.sendMessage(chat_id, " " + str(inf.read()))
 
             if "acerta_hora" in command:
-                bot.sendMessage(chat_id, f'Corrigindo a hora dos Pdvs\nAguarde um momento {name}, isso pode demorar um pouco =)')
+                bot.sendMessage(chat_id,
+                                f'Corrigindo a hora dos Pdvs\nAguarde um momento {name}, isso pode demorar um pouco =)')
                 os.system('/bin/bash -c "sh comandos.sh acertahora"')
                 inf = open("envioTelegram.txt", encoding="ISO-8859-1")
                 bot.sendMessage(chat_id, " " + str(inf.read()))
@@ -91,7 +96,7 @@ def handleCommad(content):
                 bot.sendMessage(chat_id, " " + str(inf.read()))
 
             if "ping" in command:
-                bot.sendMessage(chat_id, f'Pingando o endereço de IP '+param)
+                bot.sendMessage(chat_id, f'Pingando o endereço de IP ' + param)
                 Funcoes.ping(param)
                 inf = open("envioTelegram.txt")
                 bot.sendMessage(chat_id, " " + str(inf.read()))
@@ -99,6 +104,12 @@ def handleCommad(content):
             if "triggers" in command:
                 bot.sendMessage(chat_id, f'Triggers Alarmadas,\nAguarde um momento {name}, vou consultar para voce =)')
                 Funcoes.verificaTriggers()
+                inf = open("envioTelegram.txt")
+                bot.sendMessage(chat_id, " " + str(inf.read()))
+
+            if "eda_online" in command:
+                bot.sendMessage(chat_id, f'EDA On-line,\nAguarde um momento {name}, vou consultar para voce =)')
+                Funcoes.eda_online()
                 inf = open("envioTelegram.txt")
                 bot.sendMessage(chat_id, " " + str(inf.read()))
 
@@ -114,7 +125,6 @@ def handleCommad(content):
                 else:
                     inf = open("chamados.txt")
                     bot.sendMessage(chat_id, " " + str(inf.read()))
-
 
             bot.sendMessage(chat_id, mensagem)
         else:
